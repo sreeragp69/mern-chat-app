@@ -1,47 +1,53 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import Messages from "./Messages";
-import MessageInput from "./MessageInput";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { CiTrash } from "react-icons/ci";
 import { TiMessages } from "react-icons/ti";
-import demoPic from "../../assets/demoPic.jpg";
+import demoPic from "../../../assets/demoPic.jpg";
 
-import useConversation from "../../zustand/useConversation";
-import { useAuthContext } from "../../context/AuthContext";
-import useDeleteUser from "../../hooks/useDeleteUser";
+import useConversation from "../../../zustand/useConversation";
+import { useAuthContext } from "../../../context/AuthContext";
+import useGetSingleUser from "../../../hooks/useGetSingleUser";
+import useDeleteUser from "../../../hooks/useDeleteUser";
 
-const MessageContainer = () => {
+import Messages from "../Messages";
+import MessageInput from "../MessageInput";
+
+const Mc = () => {
   const { selectedConversation, setSelectedConversation } = useConversation();
+  const { userId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (selectedConversation?._id) {
-      setSelectedConversation(selectedConversation);
+    if (userId) {
+      setSelectedConversation({ _id: userId });
     }
 
     return () => setSelectedConversation(null);
-  }, [selectedConversation, setSelectedConversation]);
+  }, [userId, setSelectedConversation]);
 
-  
-  const { deleteUser, loading } = useDeleteUser(selectedConversation?._id);
+  const { singleUser } = useGetSingleUser(userId);
+
+  const { deleteUser, loading } = useDeleteUser(userId);
 
   const handleDelete = async () => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this user?"
     );
-
     if (confirmDelete) {
       const { loading, dltMessage } = await deleteUser();
-
       if (!loading) {
         console.log(dltMessage);
-        setSelectedConversation(null);
+        navigate("/");
       }
     }
   };
 
+  
+  
+
   return (
-    <div className={`w-full md:w-1/2 flex-col h-full hidden md:flex`}>
+    <div className={`w-full md:w-1/2 flex-col h-full flex md:hidden`}>
       {!selectedConversation ? (
         <NotChatSelected />
       ) : (
@@ -53,20 +59,24 @@ const MessageContainer = () => {
             </Link>
 
             {loading ? (
-              <img alt="Profile" src={demoPic} />
+              <img
+                alt="Profile"
+                src={demoPic}
+                className="w-8 h-8 md:w-7 md:h-7"
+              />
             ) : (
               <img
-                src={selectedConversation?.profilePic}
-                className="w-8 h-8 md:w-7 md:h-7"
+                src={selectedConversation?.profilePic || singleUser?.profilePic ||demoPic}
+                className="w-8 h-8 md:w-7 rounded-full md:h-7"
                 alt="profilePic"
               />
             )}
 
             <span className="text-white font-medium">
-              {selectedConversation?.fullName}
+              {singleUser?.fullName || selectedConversation?.fullName}
             </span>
 
-            <div className="ml-auto cursor-pointer">
+            <div className="ml-auto">
               <CiTrash onClick={handleDelete} />
             </div>
           </div>
@@ -79,7 +89,7 @@ const MessageContainer = () => {
   );
 };
 
-export default MessageContainer;
+export default Mc;
 
 const NotChatSelected = () => {
   const { authUser } = useAuthContext();

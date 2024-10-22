@@ -23,7 +23,7 @@ const useLogout = () => {
       if (res.ok) {
         toast.success(data.message)
       }
-      
+
       if (data.error) {
         throw new Error(data.error);
       }

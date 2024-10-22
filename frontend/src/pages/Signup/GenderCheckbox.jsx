@@ -10,7 +10,7 @@ const GenderCheckbox = ({ onCheckboxChange, selectedGender }) => {
             checked={selectedGender === "male"}
             onChange={() => onCheckboxChange("male")}
             type="checkbox"
-            className="checkbox border-gray-400"
+            className="checkbox border-gray-40 bg-transparent checked:bg-transparent"
           />
         </label>
       </div>

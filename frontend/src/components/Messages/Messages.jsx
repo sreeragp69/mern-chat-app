@@ -9,7 +9,7 @@ const Messages = () => {
   const { messages, loading } = useGetMessages();
 
   const lastMessageRef = useRef();
-          useListenMessages()
+  useListenMessages();
 
   useEffect(() => {
     setTimeout(() => {
@@ -18,7 +18,7 @@ const Messages = () => {
   }, [messages]);
 
   return (
-    <div className="px-4 flex-1 overflow-auto  ">
+    <div className="px-2 md:px-5 py-2 flex-1 overflow-auto">
       {!loading &&
         messages.length > 0 &&
         messages.map((message) => (

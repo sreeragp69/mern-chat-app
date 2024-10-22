@@ -4,21 +4,21 @@ import useSendMessage from "../../hooks/useSendMessage";
 
 const MessageInput = () => {
   const [message, setMessage] = useState("");
-	const { loading, sendMessage } = useSendMessage();
+  const { loading, sendMessage } = useSendMessage();
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		if (!message) return;
-		await sendMessage(message);
-		setMessage("");
-	};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!message) return;
+    await sendMessage(message);
+    setMessage("");
+  };
 
   return (
-    <form className="px-4 my-3" onSubmit={handleSubmit}>
+    <form className="p-4 md:p-3 " onSubmit={handleSubmit}>
       <div className="w-full relative ">
         <input
           type="text"
-          className="border text-sm rounded-lg block w-full p-2.5 glassy-effect border-none text-white outline-none"
+         className="border text-sm rounded-lg block w-full p-2.5 glassy-effect border-none text-white outline-none"
           placeholder="Send a message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}

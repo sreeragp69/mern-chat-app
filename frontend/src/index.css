@@ -9,6 +9,7 @@ body {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+
 }
 
 .glassy-effect{
@@ -72,5 +73,15 @@ body {
 	40%,
 	60% {
 		transform: translate3d(4px, 0, 0);
+	}
+}
+
+
+@layer components{
+	.transparent-input{
+		@apply input w-full input-ghost border-gray-400  bg-transparent focus:bg-transparent focus:outline-none focus:border-gray-400 focus:ring-0 text-gray-400
+	}
+	.search-btn{
+		@apply px-3 rounded-r-md border-l-0 btn-ghost hover:bg-transparent hover:border hover:border-gray-400 hover:border-l-0 rounded-l-none hover:text-gray-300 border-gray-400
 	}
 }

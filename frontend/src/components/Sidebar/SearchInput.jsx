@@ -8,44 +8,46 @@ const SearchInput = () => {
   const [search, setSearch] = useState("");
 
   const { setSelectedConversation } = useConversation();
-  const {conversations} = useGetConversations();
+  const { conversations } = useGetConversations();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!search) return
+    if (!search) return;
 
-
-    if (search.length <3) {
-     return  toast.error("search term must be at least 3 charecters long")
+    if (search.length < 3) {
+      return toast.error("search term must be at least 3 charecters long");
     }
 
-
-    const conversation =conversations.find((c)=>c.fullName.toLowerCase().includes(search.toLowerCase()))
+    const conversation = conversations.find((c) =>
+      c.fullName.toLowerCase().includes(search.toLowerCase())
+    );
 
     if (conversation) {
-      setSelectedConversation(conversation)
-      setSearch("")
-    }else{
-      toast.error("No such user found")
+      setSelectedConversation(conversation);
+      setSearch("");
+    } else {
+      toast.error("No such user found");
     }
-
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex items-center gap-2">
+    <form
+      onSubmit={handleSubmit}
+      className="flex justify-center items-center "
+    >
       <input
         type="text"
-        className="input input-ghost border-gray-400 rounded-full"
+        className=" border-r-0 rounded-r-none  text-xs  h-8 md:h-10 lg:h-13 transparent-input"
         placeholder="Search.."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
       <button
-        className="btn  btn-circle btn-ghost hover:glass hover:text-gray-300 border-gray-400"
+        className="search-btn h-8 md:h-10 lg:h-13  py-0"
         type="submit"
       >
-        <IoSearchSharp className="w-6 h-6 outline-none" />
+        <IoSearchSharp className="w-4 h-4  md:w-5 md:h-5 lg:w-6 lg:h-6 outline-none" />
       </button>
     </form>
   );

@@ -15,11 +15,10 @@ const Login = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-w-96  mx-auto">
+    <div className="flex flex-col items-center justify-center md:min-w-96 lg:max-w-md xl:max-w-lg 2xl:max-w-xl  mx-auto">
       <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter  backdrop-blur-lg bg-opacity-0">
         <h1 className="text-3xl  font-semibold  text-center text-gray-300">
           Login
-          <span className="text-blue-500">Chat App</span>
         </h1>
 
         <form onSubmit={handleSubmit}>
@@ -30,7 +29,7 @@ const Login = () => {
             <input
               type="text"
               placeholder="johndoe"
-              className="w-full input input-ghost border-gray-400 h-10"
+              className="w-full transparent-input h-10"
               autoComplete="off"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -44,7 +43,7 @@ const Login = () => {
             <input
               type="password"
               placeholder="Enter Password"
-              className="w-full input input-ghost border-gray-400 h-10"
+              className="w-full transparent-input h-10"
               autoComplete="new-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -61,7 +60,7 @@ const Login = () => {
           <div>
             <button
               disabled={loading}
-              className="btn  btn-outline hover:glass hover:text-gray-300 border-gray-400 btn-block btn-sm mt-2"
+              className="btn  btn-outline md:h-10 hover:glass hover:text-gray-300 border-gray-400 btn-block btn-sm mt-2"
             >
               {loading ? (
                 <span className="loading loading-spinner"></span>
