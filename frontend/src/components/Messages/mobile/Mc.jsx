@@ -80,9 +80,10 @@ const Mc = () => {
               <CiTrash onClick={handleDelete} />
             </div>
           </div>
-
-          <Messages />
-          <MessageInput />
+ <div className="flex-1 overflow-auto">
+            <Messages />
+            <MessageInput />
+          </div>
         </>
       )}
     </div>
