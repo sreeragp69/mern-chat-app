@@ -46,51 +46,48 @@ const Mc = () => {
   
   
 
-return (
-  <div className={`w-full md:w-1/2 flex-col h-full flex md:hidden`}>
-    {!selectedConversation ? (
-      <NotChatSelected />
-    ) : (
-      <>
-        {/* Header */}
-        <div className="glassy-effect px-4 py-3 md:px-3 mb-2 flex gap-3 items-center justify-between">
-          <Link className="block md:hidden" to={"/"}>
-            <IoIosArrowBack className="w-5 h-5 md:w-7 md:h-7" />
-          </Link>
+  return (
+    <div className={`w-full md:w-1/2 flex-col h-full flex md:hidden`}>
+      {!selectedConversation ? (
+        <NotChatSelected />
+      ) : (
+        <>
+          {/* Header */}
+          <div className="glassy-effect px-4 py-3 md:px-3 mb-2 flex gap-3 items-center justify-between">
+            <Link className="block md:hidden" to={"/"}>
+              <IoIosArrowBack className="w-5 h-5 md:w-7 md:h-7" />
+            </Link>
 
-          {loading ? (
-            <img
-              alt="Profile"
-              src={demoPic}
-              className="w-8 h-8 md:w-7 md:h-7"
-            />
-          ) : (
-            <img
-              src={selectedConversation?.profilePic || singleUser?.profilePic || demoPic}
-              className="w-8 h-8 md:w-7 rounded-full md:h-7"
-              alt="profilePic"
-            />
-          )}
+            {loading ? (
+              <img
+                alt="Profile"
+                src={demoPic}
+                className="w-8 h-8 md:w-7 md:h-7"
+              />
+            ) : (
+              <img
+                src={selectedConversation?.profilePic || singleUser?.profilePic ||demoPic}
+                className="w-8 h-8 md:w-7 rounded-full md:h-7"
+                alt="profilePic"
+              />
+            )}
 
-          <span className="text-white font-medium">
-            {singleUser?.fullName || selectedConversation?.fullName}
-          </span>
+            <span className="text-white font-medium">
+              {singleUser?.fullName || selectedConversation?.fullName}
+            </span>
 
-          <div className="ml-auto">
-            <CiTrash onClick={handleDelete} />
+            <div className="ml-auto">
+              <CiTrash onClick={handleDelete} />
+            </div>
           </div>
-        </div>
 
-        {/* Messages Container */}
-        <div className="flex-1 overflow-auto">
           <Messages />
           <MessageInput />
-        </div>
-      </>
-    )}
-  </div>
-);
-
+        </>
+      )}
+    </div>
+  );
+};
 
 export default Mc;
 
